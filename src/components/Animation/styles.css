@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@800&display=swap");
+
+.montserrat-container {
+  font-family: "Montserrat", Arial, sans-serif;
+}
+
+svg {
+  font-size: 10.5em;
+  letter-spacing: 0.06em; /* fallback if SVG letterSpacing is ignored */
+}
+
+.text-copy {
+  fill: none;
+  stroke: white;
+  stroke-dasharray: 6% 29%;
+  stroke-width: 5px;
+  stroke-dashoffset: 0%;
+  animation: stroke-offset 5.5s linear infinite;
+}
+
+/* Updated Colors */
+.text-copy:nth-child(1) {
+  stroke: #f2385a;
+  animation-delay: -1s;
+}
+
+.text-copy:nth-child(2) {
+  stroke: #f5a503;
+  animation-delay: -2s;
+}
+
+.text-copy:nth-child(3) {
+  stroke: #e9f1df;
+  animation-delay: -3s;
+}
+
+.text-copy:nth-child(4) {
+  stroke: #56d9cd;
+  animation-delay: -4s;
+}
+
+.text-copy:nth-child(5) {
+  stroke: #3aa1bf;
+  animation-delay: -5s;
+}
+
+@keyframes stroke-offset {
+  100% {
+    stroke-dashoffset: -35%;
+  }
+}
