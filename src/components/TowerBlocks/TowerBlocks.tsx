@@ -15,10 +15,7 @@ interface TowerBlocksProps {
   onLeaderboardSubmit?: (entry: LeaderboardEntry) => void;
 }
 
-export default function TowerBlocks({
-  leaderboardEntries = [],
-  onLeaderboardSubmit,
-}: TowerBlocksProps) {
+export default function TowerBlocks({ onLeaderboardSubmit }: TowerBlocksProps) {
   const gameRef = useRef<Game | null>(null);
   const [showLeaderboardForm, setShowLeaderboardForm] = useState(false);
   const [finalScore, setFinalScore] = useState(0);
@@ -103,8 +100,10 @@ export default function TowerBlocks({
           Click (or press the spacebar) to place the block
         </div>
         <div className="game-over">
-          <h2>Game Over</h2>
-          <p>You did great, you&apos;re the best.</p>
+          <p className="font-light !text-[#fff] tracking-[0.05em] text-[26px] text-center">
+            Game Over
+          </p>
+
           <div className="flex flex-col gap-4 mt-6">
             {!hasSubmittedReview ? (
               <button
@@ -123,7 +122,7 @@ export default function TowerBlocks({
                     setShowLeaderboardForm(true);
                   }
                 }}
-                className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                className="px-4 py-3 bg-[#5EA239] bg-opacity-70 !text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
               >
                 Submit to Leaderboard
               </button>
@@ -132,13 +131,15 @@ export default function TowerBlocks({
                 <div className="bg-green-100 text-green-800 px-4 py-2 rounded-lg mb-2">
                   ✅ Score submitted successfully!
                 </div>
-                <p className="text-sm text-gray-400">
+                <p className="font-light !text-[#fff] tracking-[0.05em] text-[12px] text-center">
                   Your score has been submitted for this game.
                 </p>
               </div>
             )}
 
-            <p className="text-sm">Click or spacebar to start again</p>
+            <p className="font-light !text-[#fff] tracking-[0.05em] text-[16px] text-center">
+              Click or spacebar to start again
+            </p>
           </div>
         </div>
         <div className="game-ready">

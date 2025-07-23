@@ -103,6 +103,7 @@
 #container.resetting #score {
   transform: translateY(0px) scale(1);
   opacity: 1;
+  color: #4bae79;
 }
 
 #container.playing #instructions {
@@ -117,11 +118,35 @@
 #container.ready .game-ready #start-button {
   opacity: 1;
   transform: translateY(0);
+  color: #fff;
+  width: 100%;
+  padding: 5px 16px;
+  max-width: 150px;
+  text-align: center;
+  background-color: #111;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 6px;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  outline: none;
+  transition: all 200ms ease-in-out;
+  font-weight: 100;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+}
+
+#container.ready .game-ready #start-button:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+#container.ready .game-ready #start-button:focus {
+  outline: none;
+  box-shadow: none;
 }
 
 #container.ended #score {
   transform: translateY(6vh) scale(1.5);
   opacity: 1;
+  color: white;
 }
 
 #container.ended .game-over {

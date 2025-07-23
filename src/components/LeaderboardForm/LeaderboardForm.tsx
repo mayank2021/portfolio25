@@ -73,7 +73,7 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
   if (isSubmitted) {
     return (
       <div
-        className="bg-white rounded-lg p-8 max-w-md w-full mx-4 text-center"
+        className="bg-[#111] border border-[rgba(255,255,255,0.5)] rounded-lg p-8 max-w-md w-full mx-4 text-center"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="mb-6">
@@ -92,30 +92,35 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
               />
             </svg>
           </div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-2">
+          <p className="font-light text-[#fff] tracking-[0.05em] text-[22px] text-center">
             Score Submitted!
-          </h3>
-          <p className="text-gray-600 mb-4">
+          </p>
+          <p className="font-light text-[#a9a9a9] tracking-[0.05em] text-[14px] text-center mb-2">
             Your score is under review and will appear on the leaderboard within
             a few hours if it qualifies for the top 10.
           </p>
-          <div className="bg-gray-50 rounded-lg p-4 mb-4">
-            <p className="text-sm text-gray-500">Your Score</p>
-            <p className="text-2xl font-bold text-gray-700">{score}</p>
+
+          <div className="border border-[#4bae79] rounded-lg p-4 mb-6 text-center">
+            <p className="text-sm text-[#4bae79] mb-1 uppercase tracking-[2px]">
+              Your Score
+            </p>
+            <p className="text-3xl font-bold text-[#4bae79]">{score}</p>
           </div>
-          <p className="text-sm text-gray-500">
+
+          <p className="font-light text-[#a9a9a9] tracking-[0.05em] text-[14px] text-center mb-2">
             Thank you for playing! Keep practicing to improve your score.
           </p>
         </div>
         <button
+          type="button"
           onClick={(e) => {
             e.preventDefault();
             e.stopPropagation();
             onClose();
           }}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-200"
+          className="w-full px-4 py-3 min-w-[140px] text-center bg-[#111] border hover:bg-[rgba(255,255,255,0.2)]   border-[rgba(255,255,255,0.5)] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
         >
-          Close
+          Cancel
         </button>
       </div>
     );
@@ -123,22 +128,24 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
 
   return (
     <div
-      className="bg-white rounded-lg p-8 max-w-md w-full mx-4"
+      className="bg-[#111] text-white rounded-lg p-8 max-w-md w-full mx-4"
       onClick={(e) => e.stopPropagation()}
     >
       <div className="text-center mb-6">
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          Submit Your Score
-        </h3>
-        <p className="text-gray-600">
-          Great job! Submit your score to compete for the top 10 leaderboard.
+        <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center">
+          Game on
+        </p>
+        <p className="font-light text-[#a9a9a9] tracking-[0.05em] text-[16px] text-center">
+          Submit your score to compete for the top 10 leaderboard.
         </p>
       </div>
 
       {/* Score Display */}
-      <div className="bg-gray-50 rounded-lg p-4 mb-6 text-center">
-        <p className="text-sm text-gray-500 mb-1">Your Score</p>
-        <p className="text-3xl font-bold text-gray-400">{score}</p>
+      <div className="border border-[#4bae79] rounded-lg p-4 mb-6 text-center">
+        <p className="text-sm text-[#4bae79] mb-1 uppercase tracking-[2px]">
+          Your Score
+        </p>
+        <p className="text-3xl font-bold text-[#4bae79]">{score}</p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-4">
@@ -146,7 +153,7 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
         <div>
           <label
             htmlFor="username"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-[#a9a9a9] mb-1"
           >
             Username
           </label>
@@ -155,9 +162,13 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
             id="username"
             value={formData.username}
             onChange={(e) => handleInputChange("username", e.target.value)}
-            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-black ${
+            className={`w-full px-3 py-3 border border-[rgba(255,255,255,0.5)] bg-[#111] rounded-lg focus:ring-2 focus:ring-none outline-none transition-colors text-white placeholder-gray-400 ${
               errors.username ? "border-red-500" : "border-gray-300"
             }`}
+            style={{
+              WebkitTextFillColor: "white",
+              WebkitBoxShadow: "0 0 0px 1000px #111 inset",
+            }}
             placeholder="Enter your username"
           />
           {errors.username && (
@@ -169,7 +180,7 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
         <div>
           <label
             htmlFor="email"
-            className="block text-sm font-medium text-gray-700 mb-1"
+            className="block text-sm font-medium text-[#a9a9a9] mb-1"
           >
             Email
           </label>
@@ -178,9 +189,13 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
             id="email"
             value={formData.email}
             onChange={(e) => handleInputChange("email", e.target.value)}
-            className={`w-full px-3 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors text-black ${
+            className={`w-full px-3 py-3 border border-[rgba(255,255,255,0.5)] bg-[#111] rounded-lg focus:ring-2 focus:ring-none outline-none transition-colors text-white placeholder-gray-400 ${
               errors.email ? "border-red-500" : "border-gray-300"
             }`}
+            style={{
+              WebkitTextFillColor: "white",
+              WebkitBoxShadow: "0 0 0px 1000px #111 inset",
+            }}
             placeholder="Enter your email"
           />
           {errors.email && (
@@ -197,23 +212,23 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
               e.stopPropagation();
               onClose();
             }}
-            className="flex-1 px-4 py-2 text-gray-600 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors duration-200"
+            className="w-full px-4 py-3 min-w-[140px] text-center bg-[#111] border hover:bg-[rgba(255,255,255,0.2)]   border-[rgba(255,255,255,0.5)] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
           >
             Cancel
           </button>
           <button
             type="submit"
-            className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+            className="w-full px-4 min-w-[140px] text-center py-3 bg-[#111] border hover:bg-[rgba(94,162,57,0.2)]  border-[#5EA239] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
           >
             Submit for Review
           </button>
         </div>
       </form>
 
-      <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-        <p className="text-sm text-blue-700">
-          <strong>Note:</strong> Your score will be reviewed and added to the
-          leaderboard within a few hours if it qualifies for the top 10.
+      <div className="mt-4 p-3 px-0 rounded-lg">
+        <p className="text-sm text-[#a9a9a9] text-center">
+          Your score will be reviewed and added to the leaderboard within a few
+          hours if it qualifies for the top 10.
         </p>
       </div>
     </div>

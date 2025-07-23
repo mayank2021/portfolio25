@@ -34,6 +34,12 @@ const TowerBlockConatiner = () => {
       score: 35,
       timestamp: new Date(Date.now() - 259200000).toISOString(), // 3 days ago
     },
+    {
+      id: "demo4",
+      username: "helloWorld",
+      score: 36,
+      timestamp: new Date(Date.now() - 259200000).toISOString(), // 3 days ago
+    },
   ]);
 
   const handleLeaderboardSubmit = (newEntry: LeaderboardEntry) => {
@@ -47,22 +53,21 @@ const TowerBlockConatiner = () => {
           Hey! Stacked my way to a score of 42
         </p>
         <p className="font-light text-[#fff] tracking-[0.05em] text-[16px] text-center mb-8">
-          Up for a challenge? Try to beat it and submit your score to the
-          leaderboard!
+          Up for a challenge? Try to beat it and top the little leaderboard war.
         </p>
 
         <div className="flex gap-4 justify-center">
           <button
             onClick={() => setShowModal(true)}
-            className="px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 font-medium"
+            className="w-full px-4 min-w-[140px] text-center py-3 bg-[#111] border hover:bg-[rgba(94,162,57,0.2)]  border-[#5EA239] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
           >
             Let&apos;s go
           </button>
           <button
             onClick={() => setShowLeaderboard(true)}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 font-medium"
+            className="w-full px-4 py-3 min-w-[140px] text-center bg-[#111] border hover:bg-[rgba(255,255,255,0.2)]   border-[rgba(255,255,255,0.5)] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
           >
-            🏆 Leaderboard
+            Leaderboard
           </button>
         </div>
       </div>
