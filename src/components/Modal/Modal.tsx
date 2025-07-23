@@ -65,36 +65,34 @@ const Modal: React.FC<ModalProps> = ({
         modalRef.current.focus();
       }
 
-      // Prevent background scroll
+      // Prevent background scroll - store original overflow value
+      const originalOverflow = document.body.style.overflow;
       document.body.style.overflow = "hidden";
+
+      // Also prevent scroll on html element for better browser support
+      document.documentElement.style.overflow = "hidden";
+
+      // Handle escape key
+      const handleEscape = (event: KeyboardEvent) => {
+        if (event.key === "Escape" && onClose) {
+          onClose();
+        }
+      };
+
+      document.addEventListener("keydown", handleEscape);
+
+      return () => {
+        // Restore original overflow values
+        document.body.style.overflow = originalOverflow || "";
+        document.documentElement.style.overflow = "";
+        document.removeEventListener("keydown", handleEscape);
+      };
     } else {
-      // Restore focus to the previously focused element
+      // Restore focus to the previously focused element when closing
       if (previousActiveElement.current) {
         previousActiveElement.current.focus();
       }
-
-      // Restore background scroll
-      document.body.style.overflow = "unset";
     }
-
-    // Handle escape key
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape" && isOpen && onClose) {
-        onClose();
-      }
-    };
-
-    if (isOpen) {
-      document.addEventListener("keydown", handleEscape);
-    }
-
-    return () => {
-      document.removeEventListener("keydown", handleEscape);
-      // Cleanup on unmount
-      if (document.body.style.overflow === "hidden") {
-        document.body.style.overflow = "unset";
-      }
-    };
   }, [isOpen, onClose]);
 
   const handleBackdropClick = (event: React.MouseEvent) => {
@@ -107,11 +105,12 @@ const Modal: React.FC<ModalProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[rgba(0,0,0,0.8)] bg-opacity-50 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[rgba(0,0,0,0.8)] bg-opacity-50 backdrop-blur-sm overflow-hidden"
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
       aria-labelledby={title ? "modal-title" : undefined}
+      style={{ touchAction: "none" }}
     >
       <div
         ref={modalRef}
@@ -121,22 +120,22 @@ const Modal: React.FC<ModalProps> = ({
       >
         {/* Header */}
         {showCloseButton && (
-          <div className="flex items-center justify-between p-6">
-            {showCloseButton && (
-              <button
-                onClick={onClose}
-                className="cursor-pointer p-2 ml-auto text-gray-400 hover:text-gray-600 focus:outline-none  bg-white rounded-full transition-colors duration-200"
-                aria-label="Close modal"
-              >
-                <CloseIcon className="w-5 h-5" />
-              </button>
-            )}
+          <div className="absolute top-4 right-4 z-10">
+            <button
+              onClick={onClose}
+              className="cursor-pointer p-2 text-gray-400 hover:text-gray-600 focus:outline-none bg-white rounded-full transition-colors duration-200"
+              aria-label="Close modal"
+            >
+              <CloseIcon className="w-5 h-5" />
+            </button>
           </div>
         )}
 
         {/* Body */}
-        <div className="p-6 overflow-y-auto h-screen flex items-center justify-center">
-          <div className="-mt-[84px]">{children}</div>
+        <div className="w-full h-full flex items-center justify-center">
+          <div className="w-full h-full max-w-6xl max-h-[90vh] flex items-center justify-center">
+            {children}
+          </div>
         </div>
       </div>
     </div>

@@ -31,13 +31,17 @@ class Stage {
       alpha: false,
     });
 
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    // Use container dimensions instead of window dimensions
+    const width = this.container?.clientWidth || window.innerWidth;
+    const height = this.container?.clientHeight || window.innerHeight;
+
+    this.renderer.setSize(width, height);
     this.renderer.setClearColor("#111", 1);
     this.container?.appendChild(this.renderer.domElement);
 
     this.scene = new THREE.Scene();
 
-    const aspect = window.innerWidth / window.innerHeight;
+    const aspect = width / height;
     const d = 20;
     this.camera = new THREE.OrthographicCamera(
       -d * aspect,
@@ -71,11 +75,15 @@ class Stage {
 
   onResize() {
     const viewSize = 30;
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
-    this.camera.left = window.innerWidth / -viewSize;
-    this.camera.right = window.innerWidth / viewSize;
-    this.camera.top = window.innerHeight / viewSize;
-    this.camera.bottom = window.innerHeight / -viewSize;
+    // Use container dimensions instead of window dimensions
+    const width = this.container?.clientWidth || window.innerWidth;
+    const height = this.container?.clientHeight || window.innerHeight;
+
+    this.renderer.setSize(width, height);
+    this.camera.left = width / -viewSize;
+    this.camera.right = width / viewSize;
+    this.camera.top = height / viewSize;
+    this.camera.bottom = height / -viewSize;
     this.camera.updateProjectionMatrix();
   }
 
@@ -314,8 +322,11 @@ export class Game {
   private keydownHandler: (e: KeyboardEvent) => void;
   private clickHandler: () => void;
   private touchstartHandler: (e: TouchEvent) => void;
+  private onGameEnd?: (score: number) => void;
+  private inputDisabled: boolean = false;
 
-  constructor() {
+  constructor(onGameEnd?: (score: number) => void) {
+    this.onGameEnd = onGameEnd;
     this.stage = new Stage();
 
     this.mainContainer = document.getElementById("container");
@@ -364,6 +375,8 @@ export class Game {
   }
 
   private onAction() {
+    if (this.inputDisabled) return;
+
     switch (this.state) {
       case this.STATES.READY:
         this.startGame();
@@ -492,6 +505,11 @@ export class Game {
 
   private endGame() {
     this.updateState(this.STATES.ENDED);
+    // Use the score from the DOM which represents the actual blocks successfully placed
+    const finalScore = parseInt(this.scoreContainer?.innerHTML || "0");
+    if (this.onGameEnd) {
+      this.onGameEnd(finalScore);
+    }
   }
 
   private tick() {
@@ -500,6 +518,10 @@ export class Game {
       this.stage.render();
       this.animationId = requestAnimationFrame(() => this.tick());
     }
+  }
+
+  public setInputDisabled(disabled: boolean) {
+    this.inputDisabled = disabled;
   }
 
   public destroy() {
