@@ -3,33 +3,24 @@
 import Ripple from "@/components/Ripple/Ripple";
 import React, { useState } from "react";
 
-const src =
-  "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQj8Xtj2QC5ru7eyRvchnCVppxifpKcuCalQQ&s";
-
 const content = [
   {
-    title: "Student Leader | Postman",
+    title: "Leadership & Community",
     description:
-      "Helped the community folks by solving their doubts and provided the needed guidance",
-    img: src,
+      "As Postman Student Leader, Vice Tech Secretary ’21, and Web Dev Lead at IIITT, I led tech-driven initiatives, mentored peers, and actively contributed to growing a collaborative community.",
+    img: "leadership.png",
   },
   {
-    title: "Vice Tech Secretary’21 | IIITT",
+    title: "Teaching & Creations",
     description:
-      "Organized several tech events/fest, managed tech clubs, and represented all students",
-    img: src,
+      "I’ve conducted over 10 workshops, published blogs, organized tech events, and created 100+ YouTube videos to simplify complex concepts and share knowledge with aspiring developers.",
+    img: "teaching.png",
   },
   {
-    title: "Web Dev Lead | IIITT",
+    title: "Initiatives & Innovation",
     description:
-      "Contributed to the college's software, delivered 20+ workshops, and led the club to wards growth",
-    img: src,
-  },
-  {
-    title: "Won 2 Hackathons",
-    description:
-      "For projects, Todogenix(a personal assistant) and Heal(a disease symptom checker )",
-    img: src,
+      "I founded Beyond Mess, a food delivery platform solving real campus needs—growing it to 100+ daily orders and 400–500 active users. Alongside, I’ve won two hackathons by building impactful solutions.",
+    img: "initiative.png",
   },
 ];
 
@@ -66,7 +57,7 @@ const Projects = () => {
               {title}
             </p>
             <p
-              className={`font-light text-[#fff] tracking-[0.05em] text-[28px] absolute transition-transform duration-1000 ease-in-out ${
+              className={`font-light text-[#fff] mr-[120px] tracking-[0.05em] text-[28px] absolute transition-transform duration-1000 ease-in-out ${
                 hoveredIndex === ind ? "translate-y-0" : "translate-y-[300%]"
               }`}
             >
@@ -79,7 +70,7 @@ const Projects = () => {
                   : "opacity-0 scale-0"
               }`}
             >
-              <Ripple color="#56d9cd" src={img} />
+              <Ripple color="#56d9cd" src={`/images/${img}`} />
             </div>
           </div>
         ))}

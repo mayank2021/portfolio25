@@ -4,7 +4,7 @@ import { CountryMarque } from "@/components/CountryMarque";
 import BubbleFooter from "@/components/Footer";
 import Toggle from "@/components/Toggle";
 import TowerBlockConatiner from "@/components/TowerBlockConatiner";
-import CompiledThoughts from "@/sections/CompiledThoughts/CompiledThoughts";
+// import CompiledThoughts from "@/sections/CompiledThoughts/CompiledThoughts";
 import Connect from "@/sections/Connect/Connect";
 import Experience from "@/sections/Experience/Experience";
 import HeroSection from "@/sections/Hero/Hero";
@@ -25,7 +25,7 @@ const Home = () => {
         <>
           <TowerBlockConatiner />
           <Experience />
-          <CompiledThoughts />
+          {/* <CompiledThoughts /> */}
           <Projects />
           {/* <InteractiveCards /> */}
           <CountryMarque />

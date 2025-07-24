@@ -8,7 +8,7 @@ const MobileIcon = () => (
     viewBox="0 0 24 24"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="fill-white group-hover:fill-[#000] transition-all duration-300"
+    className="fill-[#a9a9a9] group-hover:fill-[#fff] transition-all duration-300"
   >
     <circle cx="12" cy="12" r="12" fill="transparent" />
     <path
@@ -27,7 +27,7 @@ const EmailIcon = () => (
     viewBox="0 0 18 14"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="fill-white group-hover:fill-[#000] transition-all duration-300"
+    className="fill-[#a9a9a9] group-hover:fill-[#fff] transition-all duration-300"
   >
     <path d="M15.666 0.333496H2.33268C1.41602 0.333496 0.674349 1.0835 0.674349 2.00016L0.666016 12.0002C0.666016 12.9168 1.41602 13.6668 2.33268 13.6668H15.666C16.5827 13.6668 17.3327 12.9168 17.3327 12.0002V2.00016C17.3327 1.0835 16.5827 0.333496 15.666 0.333496ZM15.3327 3.87516L9.44102 7.5585C9.17435 7.72516 8.82435 7.72516 8.55768 7.5585L2.66602 3.87516C2.45768 3.74183 2.33268 3.51683 2.33268 3.27516C2.33268 2.71683 2.94102 2.3835 3.41602 2.67516L8.99935 6.16683L14.5827 2.67516C15.0577 2.3835 15.666 2.71683 15.666 3.27516C15.666 3.51683 15.541 3.74183 15.3327 3.87516Z" />
   </svg>
@@ -40,12 +40,40 @@ const LinkedInIcon = () => (
     viewBox="0 0 17 17"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="fill-white group-hover:fill-[#000] transition-all duration-300"
+    className="fill-[#a9a9a9] group-hover:fill-[#fff] transition-all duration-300"
   >
     <path d="M16.664 16.3337H13.3512V11.1367C13.3512 9.89735 13.3291 8.30202 11.6283 8.30202C9.90286 8.30202 9.63885 9.65222 9.63885 11.0464V16.3333H6.32617V5.6461H9.50635V7.1066H9.55095C10.1985 5.99753 11.4069 5.33265 12.6887 5.38033C16.0463 5.38033 16.6654 7.59266 16.6654 10.4709L16.664 16.3337Z" />
     <path d="M2.58886 4.18503C2.58866 4.18503 2.58856 4.18503 2.58846 4.18503C1.53384 4.18503 0.666016 3.31579 0.666016 2.25931C0.666016 1.20284 1.53384 0.333496 2.58846 0.333496C3.64299 0.333496 4.51071 1.20264 4.51091 2.25891C4.51091 2.25901 4.51091 2.25911 4.51091 2.25931C4.51091 3.31559 3.64329 4.18493 2.58886 4.18503Z" />
     <path d="M4.24587 16.3336H0.929688V5.646H4.24587V16.3336Z" />
   </svg>
+);
+
+interface AnimatedIconButtonProps {
+  icon: React.ReactNode;
+  onClick: () => void;
+  className?: string;
+  backgroundClassName?: string;
+}
+
+const AnimatedIconButton: React.FC<AnimatedIconButtonProps> = ({
+  icon,
+  onClick,
+  className,
+  backgroundClassName,
+}) => (
+  <div
+    className={`group overflow-hidden relative border-[3px] border-[#a9a9a9] flex items-center gap-2 p-3 rounded-full transition-all duration-700 hover:scale-110 hover:bg-white hover:border-white !cursor-pointer ${
+      className || ""
+    }`}
+    onClick={onClick}
+  >
+    <div
+      className={`!cursor-pointer group-hover:-translate-y-1/2 transition-all duration-700 w-16 h-16 absolute top-1/2 translate-y-[30px] left-1/2 -translate-x-1/2 ${
+        backgroundClassName || ""
+      }`}
+    ></div>
+    <div className="relative z-10 !cursor-pointer">{icon}</div>
+  </div>
 );
 
 interface MessageType {
@@ -73,51 +101,62 @@ const Connect = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleClick = (type: string) => {
-    navigator.clipboard.writeText(messages[type].value);
-    setShowAlert(messages[type].title);
+    if (type === "mail") {
+      // Open email client
+      window.location.href = `mailto:${messages[type].value}`;
+    } else if (type === "linkedin") {
+      // Open LinkedIn profile in new tab
+      window.open(messages[type].value, "_blank");
+    } else {
+      // Copy to clipboard for mobile
+      navigator.clipboard.writeText(messages[type].value);
+      setShowAlert(messages[type].title);
 
-    // Fade in
-    setTimeout(() => {
-      setIsVisible(true);
-    }, 10);
+      // Fade in
+      setTimeout(() => {
+        setIsVisible(true);
+      }, 10);
 
-    // Fade out after 1.5 seconds, then hide after fade out completes
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 1500);
+      // Fade out after 1.5 seconds, then hide after fade out completes
+      setTimeout(() => {
+        setIsVisible(false);
+      }, 1500);
 
-    setTimeout(() => {
-      setShowAlert(null);
-    }, 2000);
+      setTimeout(() => {
+        setShowAlert(null);
+      }, 2000);
+    }
   };
 
   return (
     <div className="text-white h-screen max-w-[1200px] mx-auto flex flex-col items-center justify-center relative">
       <div>
-        <p className="text-[36px] text-white font-bold text-center">
+        <p className="font-light text-[#fff] tracking-[0.05em] text-[36px] text-center">
           Say, <p className="text-red-500 inline">Hii!!</p>
         </p>
-        <p>If you&apos;re as excited as I am!</p>
+        <p className="font-light text-[#a9a9a9] tracking-[0.05em] text-[16px] text-center mb-2">
+          If you&apos;re as excited as I am!
+        </p>
       </div>
       <div className="flex gap-4 p-4">
-        <div
-          className="group border-[3px] border-white flex items-center gap-2 p-3 rounded-full transition-all duration-700 hover:scale-110 hover:bg-white hover:border-white cursor-pointer"
+        <AnimatedIconButton
+          className="hover:border-[#e4405f]"
+          backgroundClassName="bg-[#e4405f]"
+          icon={<MobileIcon />}
           onClick={() => handleClick("mobile")}
-        >
-          <MobileIcon />
-        </div>
-        <div
-          className="group border-[3px] border-white flex items-center gap-2 p-3 rounded-full transition-all duration-700 hover:scale-110 hover:bg-white hover:border-white"
+        />
+        <AnimatedIconButton
+          className="hover:border-[#dd4b39]"
+          backgroundClassName="bg-[#dd4b39]"
+          icon={<EmailIcon />}
           onClick={() => handleClick("mail")}
-        >
-          <EmailIcon />
-        </div>
-        <div
-          className="group border-[3px] border-white flex items-center gap-2 p-3 rounded-full transition-all duration-700 hover:scale-110 hover:bg-white hover:border-white"
+        />
+        <AnimatedIconButton
+          className="hover:border-[#007bb6]"
+          backgroundClassName="bg-[#007bb6]"
+          icon={<LinkedInIcon />}
           onClick={() => handleClick("linkedin")}
-        >
-          <LinkedInIcon />
-        </div>
+        />
       </div>
 
       {/* Custom Alert */}
