@@ -2,8 +2,8 @@ import React from "react";
 
 const knowMore = () => {
   return (
-    <div className="h-screen max-w-[1200px] mx-auto flex flex-col items-center justify-center">
-      <p className="text-[36px] text-white font-bold">
+    <div className="max-w-[1200px] mx-auto flex flex-col items-center justify-center">
+      <p className="font-light text-[#fff] tracking-[0.05em] text-[30px] text-center">
         Wanted to know <p className="text-[#56d9cd] inline">more</p>?
       </p>
       <div className="flex items-center gap-1">
@@ -13,7 +13,7 @@ const knowMore = () => {
           alt="arrow-right"
         />
         <a href="https://heymayank.surge.sh/" target="_blank">
-          <span className="text-[28px] font-light cursor-pointer uppercase tracking-wider text-red-500">
+          <span className="text-[28px] font-bold hover:text-red-300 transition-all duration-300 cursor-pointer uppercase tracking-wider text-[#F5513A]">
             here
           </span>
         </a>

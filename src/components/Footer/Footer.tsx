@@ -1,3 +1,5 @@
+import Connect from "@/sections/Connect/Connect";
+import KnowMore from "@/sections/knowMore/knowMore";
 import React, { useMemo } from "react";
 
 const BubbleFooter = () => {
@@ -36,23 +38,26 @@ const BubbleFooter = () => {
           ))}
         </div>
         <div className="content">
-          <div className="links-container">
-            <p
-              style={{
-                color: "black",
-              }}
-            >
-              hello world
-            </p>
-          </div>
-          <div className="brand-section  text-black">
-            <p
-              style={{
-                color: "black",
-              }}
-            >
-              hello world
-            </p>
+          <div className="flex items-center justify-center py-5">
+            <div className="w-[calc(100%/3)] px-16 flex flex-col gap-4 items-center justify-center">
+              <img
+                src="/images/logo/logo.svg"
+                alt="logo"
+                className="w-[150px]"
+              />
+              <p className="text-justify !text-[#a9a9a9]">
+                Thanks for making it this far — I hope you enjoyed the journey!
+                Got feedback, questions, or just want to chat? I’m just a
+                message away — feel free to reach out on LinkedIn or via email.
+                Would love to hear from you. Happy hacking!
+              </p>
+            </div>
+            <div className="w-[calc(100%/3)]">
+              <Connect />
+            </div>
+            <div className="w-[calc(100%/3)]">
+              <KnowMore />
+            </div>
           </div>
         </div>
       </footer>
@@ -79,7 +84,7 @@ const BubbleFooter = () => {
       <style jsx>{`
         .footer {
           z-index: 1;
-          --footer-background: #fff;
+          --footer-background: #222222;
           display: grid;
           position: relative;
           height: 12rem;

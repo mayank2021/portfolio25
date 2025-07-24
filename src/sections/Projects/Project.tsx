@@ -35,7 +35,7 @@ const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="h-screen">
+    <div className="py-20 my-20">
       <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8">
         Leadership & Achievement
       </p>

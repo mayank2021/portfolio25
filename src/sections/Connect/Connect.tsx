@@ -129,16 +129,16 @@ const Connect = () => {
   };
 
   return (
-    <div className="text-white h-screen max-w-[1200px] mx-auto flex flex-col items-center justify-center relative">
+    <div className="text-white max-w-[1200px] mx-auto flex flex-col items-center justify-center relative">
       <div>
-        <p className="font-light text-[#fff] tracking-[0.05em] text-[36px] text-center">
-          Say, <p className="text-red-500 inline">Hii!!</p>
+        <p className="font-light text-[#fff] tracking-[0.05em] text-[30px] text-center">
+          Say, <p className="text-[#F5513A] inline">Hii!!</p>
         </p>
         <p className="font-light text-[#a9a9a9] tracking-[0.05em] text-[16px] text-center mb-2">
           If you&apos;re as excited as I am!
         </p>
       </div>
-      <div className="flex gap-4 p-4">
+      <div className="flex gap-4 px-4 pt-4">
         <AnimatedIconButton
           className="hover:border-[#e4405f]"
           backgroundClassName="bg-[#e4405f]"

@@ -28,7 +28,7 @@ const fifthRow = [...skills, ...skills, ...skills];
 const CountryMarque = () => {
   const [showSkillsModal, setShowSkillsModal] = useState(false);
   return (
-    <div className="w-full bg-[#101010] py-8">
+    <div className="w-full bg-[#101010] py-20 my-20">
       <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8">
         Tech Stack
       </p>
