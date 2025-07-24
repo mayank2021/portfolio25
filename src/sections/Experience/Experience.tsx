@@ -285,7 +285,7 @@ const Experience = () => {
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
 
   return (
-    <div className="min-h-screen py-16 relative">
+    <div className="min-h-screen py-16 relative mt-10">
       <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8">
         Milestones & Impact
       </p>

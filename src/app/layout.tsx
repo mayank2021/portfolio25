@@ -21,6 +21,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Hey, it's mayank",
   description: "Frontend Developer",
+  icons: {
+    icon: "/images/logo/m.png",
+  },
 };
 
 const playfair = Playfair_Display({

@@ -35,9 +35,9 @@ const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="py-20 my-20">
-      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8">
-        Leadership & Achievement
+    <div className="py-20 mt-20">
+      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-16">
+        Highlights
       </p>
       <div>
         {content?.map(({ title, description, img }, ind) => (
