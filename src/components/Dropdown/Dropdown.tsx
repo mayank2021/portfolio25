@@ -79,17 +79,19 @@ const Dropdown = () => {
   };
 
   return (
-    <div className="w-[115px]">
+    <div className="w-[115px] max-md:w-[100px]">
       <div className="relative" ref={dropdownRef}>
         {/* Dropdown Button */}
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full px-4 py-3 text-left bg-[#111] border  border-[rgba(255,255,255,0.3)] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
+          className="w-full px-4 py-3 max-md:py-2 max-md:px-2 text-left bg-[#111] border  border-[rgba(255,255,255,0.3)] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
         >
-          <div className="flex items-center justify-between">
-            <span className={"text-[rgba(255,255,255,0.6)]"}>Resume</span>
+          <div className="flex items-center justify-between max-md:gap-1 max-md:justify-center">
+            <span className={"text-[rgba(255,255,255,0.6)] max-md:text-[14px]"}>
+              Resume
+            </span>
             <ChevronDown
-              className={`w-5 h-5 text-[rgba(255,255,255,0.6)] transition-all duration-300 ease-in-out ${
+              className={`w-5 h-5 max-md:w-4 max-md:h-4 text-[rgba(255,255,255,0.6)] transition-all duration-300 ease-in-out ${
                 isOpen ? "rotate-180 text-[rgba(255,255,255,0.6)]" : ""
               }`}
             />
@@ -109,7 +111,7 @@ const Dropdown = () => {
               <button
                 key={option.value}
                 onClick={() => handleOptionClick(option)}
-                className={`w-full px-4 py-2 text-left text-gray-200 hover:bg-[rgba(255,255,255,0.2)] hover:text-white transition-all duration-150 ease-in-out transform hover:scale-105 ${
+                className={`w-full px-4 py-2 text-left text-gray-200 hover:bg-[rgba(255,255,255,0.2)] max-md:text-[14px] hover:text-white transition-all duration-150 ease-in-out transform hover:scale-105 ${
                   isOpen ? "animate-slideIn" : ""
                 }`}
                 style={{

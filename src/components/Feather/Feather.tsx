@@ -4,7 +4,7 @@ const FeatherAnimation = () => {
   return (
     <div className="relative">
       <svg
-        className="absolute w-12 h-12 animate-feather"
+        className="absolute w-12 h-12 max-md:w-8 max-md:h-8 animate-feather"
         xmlns="http://www.w3.org/2000/svg"
         width="512"
         height="512"

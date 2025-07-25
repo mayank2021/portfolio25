@@ -5,7 +5,10 @@ import "./styles.css";
 export default function MontserratText() {
   return (
     <div className="montserrat-container flex items-center justify-center">
-      <svg viewBox="0 0 840 180" className="block w-[840px] h-[180px]">
+      <svg
+        viewBox="0 0 840 180"
+        className="block w-[840px] h-[180px] max-md:w-[350px] max-md:h-[90px]"
+      >
         <symbol id="s-text">
           <text textAnchor="middle" x="50%" y="80%">
             Mayank

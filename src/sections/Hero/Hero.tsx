@@ -72,10 +72,10 @@ export default function HeroSection({
 }) {
   return (
     <div className="relative bg-[#111]">
-      <header className="flex pt-6 px-10 justify-between absolute top-0 w-full -translate-y-[200px] animate-header">
+      <header className="flex pt-6 px-10 max-md:px-4 max-md:pt-2 max-md:items-start justify-between absolute top-0 w-full -translate-y-[200px] animate-header">
         <AnimatedText />
         <div className="flex">
-          <div className="flex items-center gap-2 p-2 mr-3">
+          <div className="flex items-center gap-2 p-2 mr-3 max-md:mr-2 max-md:p-1">
             <Toggle
               onText="XP"
               offText="XP"
@@ -90,16 +90,16 @@ export default function HeroSection({
         <CanvasDraw />
       ) : (
         <>
-          <div className="absolute left-[38%] bottom-[67%] opacity-0 animate-[fadeIn_1s_ease-in_0s_forwards]">
-            <FeatherAnimation />
-          </div>
           <div>
             <div className="bg-[#111] text-white w-full h-[100vh] flex flex-col items-center justify-center">
-              <div className="flex flex-col">
+              <div className="flex flex-col relative">
+                <div className="absolute left-[230px] top-[-50px] max-md:left-[90px] max-md:top-[-130px] opacity-0 animate-[fadeIn_1s_ease-in_0s_forwards]">
+                  <FeatherAnimation />
+                </div>
                 <div className="relative pb-0">
                   <TypingAnimation
                     text='git commit -m "Hello World!"'
-                    className="self-start font-light text-[#e9f1df] tracking-[0.05em] pl-12 text-[16px]"
+                    className="self-start font-light text-[#e9f1df] tracking-[0.05em] pl-12 text-[16px] max-md:pl-[20px] max-md:text-[12px]"
                     delay={4000}
                   />
                 </div>
@@ -107,17 +107,22 @@ export default function HeroSection({
                   <Animation />
                 </div>
 
-                <div className="relative self-end -mt-2">
+                <div className="relative self-end -mt-2 max-md:-mt-0">
                   <TypingAnimation
                     text="just another human writing command for machines"
-                    className="font-light min-w-[438px] h-6 text-[#e9f1df] tracking-[0.05em] pr-9 text-[16px] "
+                    className="font-light min-w-[438px] max-md:hidden h-6 text-[#e9f1df] tracking-[0.05em] pr-9 max-md:pr-[15px] max-md:min-w-[327px] text-[16px] max-md:text-[12px]"
+                    delay={8000}
+                  />
+                  <TypingAnimation
+                    text="another human writing command for machines"
+                    className="font-light hidden max-md:block min-w-[438px] h-6 text-[#e9f1df] tracking-[0.05em] pr-9 max-md:pr-[13px] max-md:min-w-[300px] text-[16px] max-md:text-[12px]"
                     delay={8000}
                   />
                 </div>
               </div>
             </div>
           </div>
-          <button className="opacity-0 absolute animate-show_circle left-[50%] transform -translate-x-[50%] bottom-16 text-white">
+          <button className="opacity-0 absolute animate-show_circle left-1/2 transform !-translate-x-[50%] bottom-16 text-white">
             <AnimatedCircles height={60} width={60}>
               <AnimatedArrowButton />
             </AnimatedCircles>

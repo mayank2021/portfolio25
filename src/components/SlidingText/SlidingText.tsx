@@ -34,8 +34,8 @@ const AnimatedText: React.FC<SlidingTextProps> = ({
 }) => {
   return (
     <div className="flex items-center justify-center">
-      <div className="relative overflow-hidden uppercase text-[20px] leading-10 text-gray-100 h-10">
-        <div className="relative font-light overflow-hidden h-10 tracking-[3px]">
+      <div className="relative overflow-hidden uppercase text-[20px] max-md:text-[16px] leading-10 text-gray-100 h-10 max-md:h-8">
+        <div className="relative font-light overflow-hidden h-10 max-md:h-8 tracking-[3px]">
           <ul className="flex flex-col animate-text-slide text-center list-none">
             {words.map((word, index) => (
               <li key={index}>{word}</li>
