@@ -1,30 +1,22 @@
-import React, { useState } from "react";
-
 interface ToggleProps {
   id?: string;
   onText?: string;
   offText?: string;
-  onChange?: (checked: boolean) => void;
+  onChange?: () => void;
   initialChecked?: boolean;
+  isChecked?: boolean;
 }
 
 const Toggle = ({
   id = "cb3",
   onText = "ON",
   offText = "OFF",
+  isChecked,
   onChange,
-  initialChecked = false,
 }: ToggleProps) => {
-  const [isChecked, setIsChecked] = useState(initialChecked);
-
   const handleToggle = () => {
-    const newChecked = !isChecked;
-    setIsChecked(newChecked);
-    if (onChange) {
-      onChange(newChecked);
-    }
+    onChange?.();
   };
-
   return (
     <div className="toggle-container">
       <style jsx>{`
@@ -51,7 +43,7 @@ const Toggle = ({
         .tgl + .tgl-btn {
           outline: 0;
           display: block;
-          width: 4em;
+          width: 3em;
           height: 2em;
           position: relative;
           cursor: pointer;
@@ -85,7 +77,6 @@ const Toggle = ({
           backface-visibility: hidden;
           transition: all 0.2s ease;
           font-family: sans-serif;
-          background: #888;
         }
 
         .tgl-skewed + .tgl-btn:after,
@@ -139,13 +130,13 @@ const Toggle = ({
 
       <input
         id={id}
-        className="tgl tgl-skewed"
+        className={`tgl tgl-skewed`}
         type="checkbox"
         checked={isChecked}
         onChange={handleToggle}
       />
       <label
-        className="tgl-btn"
+        className={`tgl-btn  ${isChecked ? "bg-[#86d993]" : "bg-[#888]"}`}
         data-tg-off={offText}
         data-tg-on={onText}
         htmlFor={id}

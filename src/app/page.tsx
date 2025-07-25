@@ -12,10 +12,18 @@ const Home = () => {
   const [funMode, setFunMode] = useState(false);
   return (
     <div className="bg-[#111] overflow-x-hidden">
-      <HeroSection funMode={funMode} setFunMode={setFunMode} />
+      <HeroSection
+        funMode={funMode}
+        setFunMode={() => setFunMode((prev) => !prev)}
+      />
       {funMode ? (
         <div className="z-50 relative flex justify-end items-center gap-2 p-2 mr-3">
-          <Toggle onChange={(value: boolean) => setFunMode(value)} />
+          <Toggle
+            onText="XP"
+            offText="XP"
+            isChecked={funMode}
+            onChange={() => setFunMode((prev) => !prev)}
+          />
         </div>
       ) : (
         <>

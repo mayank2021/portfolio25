@@ -68,7 +68,7 @@ export default function HeroSection({
   setFunMode,
 }: {
   funMode: boolean;
-  setFunMode: (funMode: boolean) => void;
+  setFunMode: () => void;
 }) {
   return (
     <div className="relative bg-[#111]">
@@ -76,8 +76,12 @@ export default function HeroSection({
         <AnimatedText />
         <div className="flex">
           <div className="flex items-center gap-2 p-2 mr-3">
-            <span className={"text-[rgba(255,255,255,0.6)]"}>Fun Mode</span>
-            <Toggle onChange={(value: boolean) => setFunMode(value)} />
+            <Toggle
+              onText="XP"
+              offText="XP"
+              isChecked={funMode}
+              onChange={setFunMode}
+            />
           </div>
           <Dropdown />
         </div>
