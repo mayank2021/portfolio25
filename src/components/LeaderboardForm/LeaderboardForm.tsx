@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { submitScoreForReview } from "../../libs/firebase/leaderboard";
 
 interface LeaderboardFormProps {
   score: number;
@@ -16,6 +17,8 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
     username: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
   const [errors, setErrors] = useState({
     email: "",
     username: "",
@@ -51,15 +54,38 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
     return isValid;
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
       return;
     }
 
-    onSubmit(formData);
-    setIsSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError("");
+
+    try {
+      // Submit to Firebase
+      await submitScoreForReview({
+        username: formData.username,
+        email: formData.email,
+        score: score,
+      });
+
+      // Call the original onSubmit prop for any additional logic
+      onSubmit(formData);
+      setIsSubmitted(true);
+    } catch (error: unknown) {
+      console.error("Error submitting score:", error);
+      // Show the specific error message from Firebase if available
+      const errorMessage =
+        error instanceof Error
+          ? error.message
+          : "Failed to submit score. Please try again.";
+      setSubmitError(errorMessage);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (field: string, value: string) => {
@@ -203,6 +229,13 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
           )}
         </div>
 
+        {/* Error Message */}
+        {submitError && (
+          <div className="mb-4 p-3 border border-red-500 rounded-lg bg-red-50 bg-opacity-10">
+            <p className="text-red-500 text-sm text-center">{submitError}</p>
+          </div>
+        )}
+
         {/* Buttons */}
         <div className="flex gap-3 pt-4">
           <button
@@ -218,9 +251,14 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
           </button>
           <button
             type="submit"
-            className="w-full px-4 min-w-[140px] text-center py-3 bg-[#111] border hover:bg-[rgba(94,162,57,0.2)]  border-[#5EA239] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
+            disabled={isSubmitting}
+            className={`w-full px-4 min-w-[140px] text-center py-3 bg-[#111] border rounded-md shadow-sm focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out ${
+              isSubmitting
+                ? "border-gray-500 text-gray-500 cursor-not-allowed"
+                : "border-[#5EA239] hover:bg-[rgba(94,162,57,0.2)]"
+            }`}
           >
-            Submit for Review
+            {isSubmitting ? "Submitting..." : "Submit for Review"}
           </button>
         </div>
       </form>

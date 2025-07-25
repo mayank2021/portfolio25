@@ -1,0 +1,56 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Rules for pending scores - anyone can create, only admins can read/update
+    match /pendingScores/{document} {
+      // Allow anyone to create a pending score submission
+      allow create: if true; // Allow anonymous submissions
+      
+      // Only allow reading for authenticated admin users (email-based)
+      allow read, update: if request.auth != null && isAdminUser(request.auth.token.email);
+      
+      // Validate the structure of pending score documents
+      allow create: if validatePendingScore(request.resource.data);
+    }
+    
+    // Rules for reviewed scores - only admins can write, anyone can read
+    match /reviewedScores/{document} {
+      // Anyone can read reviewed scores for the leaderboard
+      allow read: if true;
+      
+      // Only admins can create/update reviewed scores (email-based)
+      allow create, update: if request.auth != null && isAdminUser(request.auth.token.email);
+      
+      // Validate the structure of reviewed score documents
+      allow create: if validateReviewedScore(request.resource.data);
+    }
+    
+    // Function to check if user is admin based on email
+    function isAdminUser(email) {
+      return email in [
+        "mayanksonkar16@gmail.com"
+        // Add more admin emails here as needed
+      ];
+    }
+    
+    // Helper function to validate pending score structure
+    function validatePendingScore(data) {
+      return data.keys().hasAll(['username', 'email', 'score', 'submittedAt', 'status']) &&
+             data.username is string && data.username.size() >= 3 && data.username.size() <= 20 &&
+             data.email is string && data.email.matches('.*@.*\\..*') &&
+             data.score is number && data.score >= 0 &&
+             data.submittedAt is timestamp &&
+             data.status in ['pending', 'reviewed', 'rejected'];
+    }
+    
+    // Helper function to validate reviewed score structure
+    function validateReviewedScore(data) {
+      return data.keys().hasAll(['username', 'email', 'score', 'submittedAt', 'reviewedAt']) &&
+             data.username is string && data.username.size() >= 3 && data.username.size() <= 20 &&
+             data.email is string && data.email.matches('.*@.*\\..*') &&
+             data.score is number && data.score >= 0 &&
+             data.submittedAt is timestamp &&
+             data.reviewedAt is timestamp;
+    }
+  }
+} 

@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import AnimatedCircles from "../CircleAnimation/CircleAnimation";
+import {
+  getTopReviewedScores,
+  ReviewedScore,
+} from "../../libs/firebase/leaderboard";
 
 interface LeaderboardEntry {
   id: string;
@@ -9,13 +13,46 @@ interface LeaderboardEntry {
 }
 
 interface LeaderboardProps {
-  entries: LeaderboardEntry[];
+  entries?: LeaderboardEntry[]; // Made optional since we'll fetch from Firebase
   onClose: () => void;
 }
 
-const Leaderboard: React.FC<LeaderboardProps> = ({ entries, onClose }) => {
+const Leaderboard: React.FC<LeaderboardProps> = ({ entries = [], onClose }) => {
+  const [firebaseEntries, setFirebaseEntries] = useState<ReviewedScore[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string>("");
+
+  useEffect(() => {
+    const fetchLeaderboardData = async () => {
+      try {
+        setIsLoading(true);
+        const topScores = await getTopReviewedScores(10);
+        setFirebaseEntries(topScores);
+        setError("");
+      } catch (err) {
+        console.error("Error fetching leaderboard:", err);
+        setError("Failed to load leaderboard data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchLeaderboardData();
+  }, []);
+
+  // Use Firebase data if available, otherwise fall back to passed entries
+  const displayEntries =
+    firebaseEntries.length > 0
+      ? firebaseEntries.map((entry) => ({
+          id: entry.id || entry.username,
+          username: entry.username,
+          score: entry.score,
+          timestamp: entry.submittedAt.toDate().toISOString(),
+        }))
+      : entries;
+
   // Sort entries by score in descending order (high to low)
-  const sortedEntries = [...entries].sort((a, b) => b.score - a.score);
+  const sortedEntries = [...displayEntries].sort((a, b) => b.score - a.score);
 
   const getStyle = (index: number) => {
     if (index === 0)
@@ -46,7 +83,43 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries, onClose }) => {
         </button>
       </div>
 
-      {sortedEntries.length === 0 ? (
+      {isLoading ? (
+        <div className="text-center py-12">
+          <div className="text-gray-400 mb-4">
+            <div className="w-16 h-16 mx-auto border-4 border-[#4BAE79] border-t-transparent rounded-full animate-spin"></div>
+          </div>
+          <p className="text-[#ffff] font-medium uppercase tracking-[0.09em] text-[22px]">
+            Loading...
+          </p>
+          <p className="font-light text-[#A9A9A9] tracking-[0.05em] text-[16px]">
+            Fetching the latest scores
+          </p>
+        </div>
+      ) : error ? (
+        <div className="text-center py-12">
+          <div className="text-red-400 mb-4">
+            <svg
+              className="w-16 h-16 mx-auto"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={1}
+                d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <p className="text-[#ffff] font-medium uppercase tracking-[0.09em] text-[22px]">
+            Error Loading Data
+          </p>
+          <p className="font-light text-[#A9A9A9] tracking-[0.05em] text-[16px]">
+            {error}
+          </p>
+        </div>
+      ) : sortedEntries.length === 0 ? (
         <div className="text-center py-12">
           <div className="text-gray-400 mb-4">
             <svg
@@ -59,7 +132,7 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries, onClose }) => {
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={1}
-                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012 2v2M7 7h10"
               />
             </svg>
           </div>
@@ -73,17 +146,17 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries, onClose }) => {
         </div>
       ) : (
         <div className="overflow-hidden shadow rounded-lg ">
-          <div className="border border-[rgba(255,255,255,0.3)] rounded-lg p-3 flex justify-between mb-3">
-            <p className="font-light text-white tracking-[0.05em] text-[16px] text-center">
+          <div className="border border-[rgba(255,255,255,0.3)] rounded-lg p-3 grid grid-cols-[1fr_2fr_1fr_1.5fr] gap-4 mb-3">
+            <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
               Rank
             </p>
-            <p className="font-light text-white tracking-[0.05em] text-[16px] text-center">
+            <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
               Username
             </p>
-            <p className="font-light text-white tracking-[0.05em] text-[16px] text-center">
+            <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
               Score
             </p>
-            <p className="font-light text-white tracking-[0.05em] text-[16px] text-center">
+            <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
               Date
             </p>
           </div>
@@ -93,18 +166,18 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries, onClose }) => {
                 key={entry.username}
                 className={`border ${getStyle(
                   index
-                )}  rounded-lg p-3 flex justify-between`}
+                )}  rounded-lg p-3 grid grid-cols-[1fr_2fr_1fr_1.5fr] gap-4`}
               >
-                <p className="font-light text-white tracking-[0.05em] text-[16px] text-center">
+                <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
                   {index + 1}
                 </p>
-                <p className="font-light text-white tracking-[0.05em] text-[16px] text-center">
+                <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
                   {entry.username}
                 </p>
-                <p className="font-light text-white tracking-[0.05em] text-[16px] text-center">
+                <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
                   {entry.score}
                 </p>
-                <p className="font-light text-white tracking-[0.05em] text-[16px] text-center">
+                <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
                   {new Date(entry.timestamp).toLocaleDateString()}
                 </p>
               </div>

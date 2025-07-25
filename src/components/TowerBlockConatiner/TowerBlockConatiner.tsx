@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Modal from "../Modal/Modal";
 import TowerBlocks from "../TowerBlocks";
 import Leaderboard from "../Leaderboard";
@@ -45,6 +45,20 @@ const TowerBlockConatiner = () => {
   const handleLeaderboardSubmit = (newEntry: LeaderboardEntry) => {
     setLeaderboardEntries((prev) => [...prev, newEntry]);
   };
+
+  // Prevent background scrolling when leaderboard is open
+  useEffect(() => {
+    if (showLeaderboard) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup function to restore scrolling when component unmounts
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [showLeaderboard]);
 
   return (
     <div className="text-white h-[80vh] mb-20 flex flex-col justify-center items-center">
