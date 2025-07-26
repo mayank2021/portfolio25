@@ -20,7 +20,7 @@ interface Company {
 
 const content: Company[] = [
   {
-    companyName: "Zinc money",
+    companyName: "Zinc",
     jobTitle: "Frontend developer",
     color: "#CA7842",
     logo: "zinc_logo.png",
@@ -69,7 +69,7 @@ const content: Company[] = [
     ],
   },
   {
-    companyName: "Psiborg Tech",
+    companyName: "Psiborg",
     jobTitle: "Frontend developer",
     logo: "psiborg_logo.jpeg",
     bg: "psi.png",
@@ -168,7 +168,7 @@ const content: Company[] = [
   },
   {
     companyName: "Spenza",
-    jobTitle: "Frontend/Dev Rel intern",
+    jobTitle: "Frontend intern",
     logo: "spenza_logo.jpeg",
     bg: "spenza.png",
     color: "#56d9cd",
@@ -200,22 +200,25 @@ const CompanyDetail = ({
 }) => {
   return (
     <div
-      className={`w-full h-screen z-10 bg-[#111] fixed top-0 left-0 transition-all duration-500 ease-in-out ${
+      className={`w-full max-md:overflow-y-auto h-screen z-10 bg-[#111] fixed top-0 left-0 transition-all duration-500 ease-in-out ${
         show ? "translate-x-0" : "translate-x-[110%]"
       }`}
     >
-      <div className="relative">
-        <button onClick={onClose} className="absolute top-8 right-8 text-white">
+      <div className="relative max-md:mb-10 max-md:mt-5">
+        <button
+          onClick={onClose}
+          className="absolute top-8 right-8 max-md:top-0 max-md:right-4 text-white"
+        >
           <AnimatedCircles text="X" textStyle="text-white font-bold" />
         </button>
         <div className="flex gap-4">
           <img
             src={`/images/${selectedCompany?.bg}`}
-            className="w-[40%] h-screen"
+            className="w-[40%] h-screen max-md:hidden"
           />
-          <div className="text-white pr-10">
+          <div className="text-white pr-10 max-md:px-4">
             <p
-              className="font-bold font-playfair tracking-[0.05em] text-[72px] capitalize"
+              className="font-bold font-playfair tracking-[0.05em] text-[72px] capitalize max-md:text-[48px]"
               style={{ color: selectedCompany?.color }}
             >
               {selectedCompany?.companyName}
@@ -223,7 +226,7 @@ const CompanyDetail = ({
             <p className="font-light tracking-[0.05em] text-[20px] uppercase mb-2">
               Highlights
             </p>
-            <ol className="list-disc pl-3 space-y-2 text-[16px] text-[rgba(255,255,255,0.7)]">
+            <ol className="list-disc pl-3 space-y-2 text-[16px]  max-md:text-[12px] max-md:text-justify text-[rgba(255,255,255,0.7)]">
               {selectedCompany?.highlights?.map((ele) => {
                 if (Array.isArray(ele)) {
                   const content = (
@@ -247,11 +250,11 @@ const CompanyDetail = ({
             <p className="font-light tracking-[0.05em] text-[20px] uppercase mt-6 mb-2">
               tech used
             </p>
-            <div className="flex gap-2">
+            <div className="flex gap-2 max-md:flex-wrap">
               {selectedCompany?.tech?.map((ele) => (
                 <p
                   key={ele}
-                  className="border py-2 px-4 rounded-lg tracking-wider uppercase"
+                  className="border py-2 px-4 max-md:grow max-md:text-center rounded-lg tracking-wider uppercase max-md:text-[12px]"
                   style={{ borderColor: selectedCompany?.color }}
                 >
                   {ele}
@@ -264,6 +267,7 @@ const CompanyDetail = ({
             <div className="flex gap-3 flex-wrap">
               {selectedCompany?.links?.map((ele) => (
                 <GlassButton
+                  className="max-md:grow"
                   key={ele?.title}
                   onClick={() => {
                     window.open(ele.href);
@@ -285,12 +289,12 @@ const Experience = () => {
   const [selectedCompany, setSelectedCompany] = useState<Company | null>(null);
 
   return (
-    <div className="min-h-screen py-16 relative mt-10">
-      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8">
+    <div className="min-h-screen py-16 relative mt-10 max-md:overflow-x-hidden">
+      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8 max-md:mb-20">
         Milestones & Impact
       </p>
 
-      <div className="flex flex-col gap-6 items-center">
+      <div className="flex flex-col gap-6 max-md:gap-12 items-center">
         {content?.map((company, ind) => {
           return (
             <div
@@ -310,16 +314,18 @@ const Experience = () => {
             >
               <img
                 src={`/images/${company?.logo}`}
-                className={`rounded-full w-[244px] p-4 h-[244px] absolute -top-[200px] ${
-                  ind % 2 === 0 ? "-left-[400px]" : "-right-[400px]"
-                } transition-transform duration-500 ease-in-out border-2 border-[#56d9cd] scale-0 group-hover:scale-100`}
+                className={`rounded-full w-[244px] p-4 h-[244px] max-md:w-[160px] max-md:h-[160px] absolute -top-[200px] max-md:-top-[30px] ${
+                  ind % 2 === 0
+                    ? "-left-[400px] max-md:-left-[60px]"
+                    : "-right-[400px]  max-md:-right-[60px]"
+                } transition-transform duration-500 ease-in-out border-2 max-md:opacity-30 border-[#56d9cd] scale-0 group-hover:scale-100 max-md:scale-100`}
                 style={{ borderColor: company?.color }}
               />
 
-              <p className="font-bold font-playfair tracking-[0.05em] text-[72px] capitalize">
+              <p className="font-bold max-md:z-10 max-md:relative max-md:text-[48px] font-playfair tracking-[0.05em] text-[72px] capitalize">
                 {company?.companyName}
               </p>
-              <p className="font-light text-[rgba(255,255,255,0.8)] uppercase tracking-[0.3em] text-[16px]">
+              <p className="font-light text-[rgba(255,255,255,0.8)] uppercase tracking-[0.3em] text-[16px] max-md:text-[12px]">
                 {company?.jobTitle}
               </p>
             </div>

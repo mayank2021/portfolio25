@@ -37,9 +37,9 @@ const BubbleFooter = () => {
             />
           ))}
         </div>
-        <div className="content">
-          <div className="flex items-center justify-center py-5">
-            <div className="w-[calc(100%/3)] px-16 flex flex-col gap-4 items-center justify-center">
+        <div className="content max-md:!px-4">
+          <div className="flex items-center justify-center py-5 max-md:flex-col max-md:gap-10">
+            <div className="w-[calc(100%/3)] max-md:w-full px-16 max-md:px-4 flex flex-col gap-4 items-center justify-center">
               <img
                 src="/images/logo/logo.svg"
                 alt="logo"
@@ -52,10 +52,10 @@ const BubbleFooter = () => {
                 Would love to hear from you. Happy hacking!
               </p>
             </div>
-            <div className="w-[calc(100%/3)]">
+            <div className="w-[calc(100%/3)] max-md:w-full max-md:px-4 ">
               <Connect />
             </div>
-            <div className="w-[calc(100%/3)]">
+            <div className="w-[calc(100%/3)]  max-md:w-full max-md:px-4 ">
               <KnowMore />
             </div>
           </div>

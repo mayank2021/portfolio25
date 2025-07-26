@@ -2,6 +2,7 @@
 
 import Ripple from "@/components/Ripple/Ripple";
 import React, { useState } from "react";
+import { ChevronDown } from "lucide-react";
 
 const content = [
   {
@@ -45,19 +46,23 @@ const Projects = () => {
             key={title}
             className={`${getBorder(
               ind
-            )} py-6 px-4  relative overflow-hidden h-[160px] flex flex-col justify-center`}
+            )} py-6 px-4 max-md:py-2 relative overflow-hidden h-[160px] max-md:h-[100px] flex flex-col justify-center`}
             onMouseEnter={() => setHoveredIndex(ind)}
             onMouseLeave={() => setHoveredIndex(null)}
           >
             <p
-              className={`font-bold text-[#fff] tracking-[0.05em] text-[58px] absolute transition-transform duration-1000 ease-in-out ${
+              className={`font-bold max-md:flex max-md:items-center max-md:gap-2 text-[#fff] tracking-[0.05em] text-[58px] max-md:text-[24px] absolute transition-transform duration-1000 ease-in-out ${
                 hoveredIndex === ind ? "-translate-y-[300%]" : "translate-y-0"
               }`}
             >
-              {title}
+              {title}{" "}
+              <ChevronDown
+                className={`hidden max-md:block w-5 h-5 text-[rgba(255,255,255,1)]`}
+              />
             </p>
+
             <p
-              className={`font-light text-[#fff] mr-[120px] tracking-[0.05em] text-[28px] absolute transition-transform duration-1000 ease-in-out ${
+              className={`font-light text-[#fff] mr-[120px] max-md:mr-[90px] tracking-[0.05em] text-[28px] max-md:text-[10px] max-md:text-justify absolute transition-transform duration-1000 ease-in-out ${
                 hoveredIndex === ind ? "translate-y-0" : "translate-y-[300%]"
               }`}
             >
