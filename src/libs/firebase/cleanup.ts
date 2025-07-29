@@ -91,10 +91,13 @@ export const cleanupScoresWithoutEmail = async (): Promise<void> => {
     const querySnapshot = await getDocs(
       collection(db, REVIEWED_SCORES_COLLECTION)
     );
-    const allScores = querySnapshot.docs.map((doc) => ({
-      id: doc.id,
-      ...doc.data(),
-    }));
+    const allScores = querySnapshot.docs.map(
+      (doc) =>
+        ({
+          id: doc.id,
+          ...doc.data(),
+        } as ReviewedScore)
+    );
 
     let deletedCount = 0;
 

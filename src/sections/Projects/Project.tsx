@@ -36,8 +36,8 @@ const Projects = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <div className="py-20 mt-20">
-      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-16">
+    <div className="py-20 mt-20 max-md:mt-0 max-md:pt-5">
+      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-16 max-md:mb-8">
         Highlights
       </p>
       <div>

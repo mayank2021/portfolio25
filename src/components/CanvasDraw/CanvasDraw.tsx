@@ -48,12 +48,13 @@ export default function CanvasTrail() {
     const points: Point[] = [];
 
     function drawLines() {
-      let total = points.length;
+      const total = points.length;
       for (let i = total - 1; i > 1; i--) {
         const p0 = points[i];
         const p1 = points[i - 1];
         const p2 = points[i - 2];
 
+        if (!context) return;
         context.beginPath();
         context.strokeStyle = p0.color;
         context.lineWidth = p0.size;
@@ -75,6 +76,7 @@ export default function CanvasTrail() {
     }
 
     function draw() {
+      if (!context || !canvas) return;
       let dx = (mouseX - px) * SPEED_X;
       let dy = (mouseY - py) * SPEED_Y;
 
@@ -118,11 +120,13 @@ export default function CanvasTrail() {
     }
 
     function resize() {
+      if (!canvas) return;
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     }
 
     function init() {
+      if (!canvas) return;
       canvas.onmousemove = (e) => {
         mouseX = e.pageX;
         mouseY = e.pageY;
@@ -155,14 +159,18 @@ export default function CanvasTrail() {
             p.y = mouseY;
           });
         }
-        if (!e.target.href) e.preventDefault();
+        // Only preventDefault if e.target is an Element and does not have href
+        const target = e.target as Element | null;
+        if (target && !(target instanceof HTMLAnchorElement && target.href)) {
+          e.preventDefault();
+        }
       };
 
       window.addEventListener("resize", resize);
       resize();
 
-      mouseX = canvas.width / 2;
-      mouseY = canvas.height / 2;
+      mouseX = (canvas?.width ?? window.innerWidth) / 2;
+      mouseY = (canvas?.height ?? window.innerHeight) / 2;
 
       update();
     }

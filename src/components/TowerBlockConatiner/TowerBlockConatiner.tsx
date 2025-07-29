@@ -61,7 +61,7 @@ const TowerBlockConatiner = () => {
   }, [showLeaderboard]);
 
   return (
-    <div className="text-white h-[80vh] mb-20 flex flex-col justify-center items-center">
+    <div className="text-white h-[80vh] mb-20 flex flex-col justify-center items-center max-md:px-4">
       <div className="w-full flex flex-col gap-2 items-center justify-center">
         <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center">
           Hey! Stacked my way to a score of 42

@@ -28,11 +28,11 @@ const fifthRow = [...skills, ...skills, ...skills];
 const CountryMarque = () => {
   const [showSkillsModal, setShowSkillsModal] = useState(false);
   return (
-    <div className="w-full bg-[#101010] py-20 my-20">
-      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8">
+    <div className="w-full bg-[#111] py-20 my-20 max-md:my-10">
+      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8 max-md:mb-0">
         Tech Stack
       </p>
-      <div className="space-y-8 py-5">
+      <div className="space-y-8 py-5 max-md:space-y-3">
         {/* First row - scrolling right */}
         <div className="relative overflow-hidden">
           <div className="flex w-fit animate-scroll-right hover-pause-row">
@@ -42,7 +42,7 @@ const CountryMarque = () => {
                 className="flex items-center hover-trigger cursor-pointer"
                 onClick={() => setShowSkillsModal(true)}
               >
-                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-[18px] text-white hover-card-animation">
+                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-3 text-white hover-card-animation">
                   <span className="mr-3 text-xl">
                     <img
                       className={`w-7 h-7 max-md:w-5 max-md:h-5 ${university.style}`}
@@ -56,7 +56,9 @@ const CountryMarque = () => {
                   </span>
                 </div>
 
-                <span className="pr-10 pl-3">{dot}</span>
+                <span className="pr-10 pl-3 max-md:pl-2 max-md:pr-7">
+                  {dot}
+                </span>
               </div>
             ))}
           </div>
@@ -71,7 +73,7 @@ const CountryMarque = () => {
                 className="flex items-center hover-trigger cursor-pointer"
                 onClick={() => setShowSkillsModal(true)}
               >
-                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-[18px] text-white hover-card-animation">
+                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-3 text-white hover-card-animation">
                   <span className="mr-3 text-xl">
                     <img
                       className={`w-7 h-7 max-md:w-5 max-md:h-5 ${university.style}`}
@@ -85,7 +87,9 @@ const CountryMarque = () => {
                   </span>
                 </div>
 
-                <span className="pr-10 pl-3">{dot}</span>
+                <span className="pr-10 pl-3 max-md:pl-2 max-md:pr-7">
+                  {dot}
+                </span>
               </div>
             ))}
           </div>
@@ -100,7 +104,7 @@ const CountryMarque = () => {
                 className="flex items-center hover-trigger cursor-pointer"
                 onClick={() => setShowSkillsModal(true)}
               >
-                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-[18px] text-white hover-card-animation">
+                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-3 text-white hover-card-animation">
                   <span className="mr-3 text-xl">
                     <img
                       className={`w-7 h-7 max-md:w-5 max-md:h-5 ${university.style}`}
@@ -114,7 +118,9 @@ const CountryMarque = () => {
                   </span>
                 </div>
 
-                <span className="pr-10 pl-3">{dot}</span>
+                <span className="pr-10 pl-3 max-md:pl-2 max-md:pr-7">
+                  {dot}
+                </span>
               </div>
             ))}
           </div>
@@ -129,7 +135,7 @@ const CountryMarque = () => {
                 className="flex items-center hover-trigger cursor-pointer"
                 onClick={() => setShowSkillsModal(true)}
               >
-                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-[18px] text-white hover-card-animation">
+                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-3 text-white hover-card-animation">
                   <span className="mr-3 text-xl">
                     <img
                       className={`w-7 h-7 max-md:w-5 max-md:h-5 ${university.style}`}
@@ -143,7 +149,9 @@ const CountryMarque = () => {
                   </span>
                 </div>
 
-                <span className="pr-10 pl-3">{dot}</span>
+                <span className="pr-10 pl-3 max-md:pl-2 max-md:pr-7">
+                  {dot}
+                </span>
               </div>
             ))}
           </div>
@@ -158,7 +166,7 @@ const CountryMarque = () => {
                 className="flex items-center hover-trigger cursor-pointer"
                 onClick={() => setShowSkillsModal(true)}
               >
-                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-[18px] text-white hover-card-animation">
+                <div className="flex rounded-[14px] flex-shrink-0 items-center border border-[rgba(255,255,255,0.12)] bg-transparent px-5 py-2 max-md:py-2 max-md:px-3 text-white hover-card-animation">
                   <span className="mr-3 text-xl">
                     <img
                       className={`w-7 h-7 max-md:w-5 max-md:h-5 ${university.style}`}
@@ -172,7 +180,9 @@ const CountryMarque = () => {
                   </span>
                 </div>
 
-                <span className="pr-10 pl-3">{dot}</span>
+                <span className="pr-10 pl-3 max-md:pl-2 max-md:pr-7">
+                  {dot}
+                </span>
               </div>
             ))}
           </div>

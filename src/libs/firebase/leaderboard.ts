@@ -9,8 +9,10 @@ import {
   where,
   updateDoc,
   doc,
+  deleteDoc,
 } from "firebase/firestore";
 import { db } from "./config";
+import firebase from "firebase/compat/app";
 
 export interface PendingScore {
   id?: string;
@@ -90,7 +92,10 @@ export const submitScoreForReview = async (scoreData: {
     }
   } catch (error) {
     console.error("Error submitting score for review:", error);
-    if (error.message.includes("higher than or equal")) {
+    if (
+      error instanceof Error &&
+      error.message.includes("higher than or equal")
+    ) {
       throw error; // Re-throw our custom error message
     }
     throw new Error("Failed to submit score for review");
@@ -166,7 +171,9 @@ export const approveScore = async (
 
     if (allExistingDocs.size > 0) {
       // Update the first document and delete the rest
-      const docsArray = Array.from(allExistingDocs) as any[];
+      const docsArray = Array.from(
+        allExistingDocs
+      ) as firebase.firestore.QueryDocumentSnapshot<firebase.firestore.DocumentData>[];
       const firstDoc = docsArray[0];
 
       // Update the first document

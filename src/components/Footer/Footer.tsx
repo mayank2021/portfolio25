@@ -52,9 +52,13 @@ const BubbleFooter = () => {
                 Would love to hear from you. Happy hacking!
               </p>
             </div>
+            <div className="h-[1px] w-[70%] bg-[#333] my-3 hidden max-md:block"></div>
             <div className="w-[calc(100%/3)] max-md:w-full max-md:px-4 ">
               <Connect />
             </div>
+
+            <div className="h-[1px] w-[70%] bg-[#333] my-3 hidden max-md:block"></div>
+
             <div className="w-[calc(100%/3)]  max-md:w-full max-md:px-4 ">
               <KnowMore />
             </div>

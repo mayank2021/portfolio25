@@ -1,11 +1,19 @@
 import React, { useState, useRef, useEffect } from "react";
 
-const Card = ({ dataImage, header, content }) => {
+interface CardProps {
+  dataImage: string;
+  header: string;
+  content: string;
+}
+
+const Card: React.FC<CardProps> = ({ dataImage, header, content }) => {
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [mouse, setMouse] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
-  const cardRef = useRef(null);
-  const mouseLeaveTimeoutRef = useRef(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const mouseLeaveTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(
+    null
+  );
 
   useEffect(() => {
     if (cardRef.current) {
@@ -14,7 +22,7 @@ const Card = ({ dataImage, header, content }) => {
     }
   }, []);
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     if (!cardRef.current) return;
 
     const rect = cardRef.current.getBoundingClientRect();
@@ -33,6 +41,9 @@ const Card = ({ dataImage, header, content }) => {
 
   const handleMouseLeave = () => {
     setIsHovered(false);
+    if (mouseLeaveTimeoutRef.current) {
+      clearTimeout(mouseLeaveTimeoutRef.current);
+    }
     mouseLeaveTimeoutRef.current = setTimeout(() => {
       setMouse({ x: 0, y: 0 });
     }, 1000);
