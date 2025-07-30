@@ -31,7 +31,7 @@ const Tag = ({
   return (
     <div
       draggable={true}
-      className={`border border-white py-2 px-4 rounded-lg tracking-wider uppercase transition-all duration-300 flex items-center gap-2 ${
+      className={`border border-white py-2 px-4 rounded-lg max-md:text-[12px] max-md:px-2 max-md:py-1 max-md:rounded-[4px] tracking-wider uppercase transition-all duration-300 flex items-center gap-2 ${
         type === "used"
           ? "bg-white hover:bg-transparent hover:text-white text-black"
           : "text-white hover:border-transparent"
@@ -40,7 +40,7 @@ const Tag = ({
       <img
         src={skill.icon}
         alt={skill.name}
-        className={`w-6 h-6 ${skill.style || ""}`}
+        className={`w-6 h-6 max-md:w-4 max-md:h-4 ${skill.style || ""}`}
       />
       <span>{skill.name}</span>
     </div>
@@ -61,25 +61,25 @@ const Skills = () => {
   );
 
   return (
-    <div className="max-w-[1200px] mx-auto">
-      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] text-center mb-8">
+    <div className="max-w-[1200px] mx-auto max-md:pt-10 max-md:pb-4 max-md:h-screen max-md:overflow-y-auto">
+      <p className="font-light text-[#fff] tracking-[0.05em] text-[26px] max-md:text-[20px] text-center mb-8">
         Tech Stack
       </p>
       <div className="flex flex-col gap-4 items-center mb-12">
-        <p className="font-light text-[#fff] tracking-[0.05em] text-[20px] text-center">
+        <p className="font-light text-[#fff] tracking-[0.05em] text-[20px] max-md:text-[16px] text-center">
           Indicators
         </p>
         <div className="flex gap-4">
-          <div className="border border-white py-2 px-4 rounded-lg tracking-wider uppercase bg-white text-black flex items-center gap-2">
+          <div className="border border-white py-2 px-4 max-md:text-[12px] max-md:px-2 max-md:py-1 max-md:rounded-[4px] rounded-lg tracking-wider uppercase bg-white text-black flex items-center gap-2">
             <span>Recently used</span>
           </div>
-          <div className="border border-white py-2 px-4 rounded-lg tracking-wider uppercase text-white flex items-center gap-2">
+          <div className="border border-white py-2 px-4 max-md:text-[12px] max-md:px-2 max-md:py-1 max-md:rounded-[4px]  rounded-lg tracking-wider uppercase text-white flex items-center gap-2">
             <span>Familiar</span>
           </div>
         </div>
       </div>
       <div className="flex flex-col gap-4 items-center mb-12">
-        <p className="font-light text-[#fff] tracking-[0.05em] text-[20px] text-center">
+        <p className="font-light text-[#fff] tracking-[0.05em] text-[20px] max-md:text-[16px] text-center">
           Languages
         </p>
         <div className="flex gap-4 flex-wrap justify-center">
@@ -89,7 +89,7 @@ const Skills = () => {
         </div>
       </div>
       <div className="flex flex-col justify-center gap-4 items-center mb-12">
-        <p className="font-light text-[#fff] tracking-[0.05em] text-[20px] text-center">
+        <p className="font-light text-[#fff] tracking-[0.05em] text-[20px] max-md:text-[16px] text-center">
           Technologies
         </p>
         <div className="flex gap-4 flex-wrap justify-center">
