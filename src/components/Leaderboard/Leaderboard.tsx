@@ -65,8 +65,15 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries = [], onClose }) => {
     return "border-[rgba(255,255,255,0.3)]";
   };
 
+  const handleUserName = (name: string) => {
+    const firstName = name.split(" ")[0];
+    const capitalizedFirstName =
+      firstName.charAt(0).toUpperCase() + firstName.slice(1);
+    return capitalizedFirstName?.slice(0, 12);
+  };
+
   return (
-    <div className="bg-[#111] relative border border-[rgba(255,255,255,0.3)] rounded-lg p-8 max-w-3xl w-full mx-4 max-h-[80vh] overflow-y-auto">
+    <div className="bg-[#111] relative border border-[rgba(255,255,255,0.3)] rounded-lg p-8 max-md:px-4 max-w-3xl w-full mx-4 max-h-[80vh] overflow-y-auto">
       <div className="flex justify-between items-center mb-6">
         <div className="flex flex-col gap-0 text-left">
           <p className="text-[#4BAE79] font-medium uppercase tracking-[0.09em] text-[22px]">
@@ -74,11 +81,14 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries = [], onClose }) => {
           </p>
           {sortedEntries.length !== 0 && (
             <p className="font-light text-[#A9A9A9] tracking-[0.05em] text-[16px]">
-              Your name here? That’s no accident — legends stack like you!
+              Your name here? That’s no accident, legends stack like you!
             </p>
           )}
         </div>
-        <button onClick={onClose} className="text-white absolute top-5 right-5">
+        <button
+          onClick={onClose}
+          className="text-white absolute top-5 right-5 max-md:top-2 max-md:right-2"
+        >
           <AnimatedCircles text="X" textStyle="text-white font-bold" />
         </button>
       </div>
@@ -145,18 +155,18 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries = [], onClose }) => {
           </p>
         </div>
       ) : (
-        <div className="overflow-hidden shadow rounded-lg ">
+        <div className="overflow-hidden shadow rounded-lg">
           <div className="border border-[rgba(255,255,255,0.3)] rounded-lg p-3 grid grid-cols-[1fr_2fr_1fr_1.5fr] gap-4 mb-3">
-            <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
+            <p className="font-light text-white tracking-[0.05em] text-[16px] max-md:text-[12px] text-left">
               Rank
             </p>
-            <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
+            <p className="font-light text-white tracking-[0.05em] text-[16px] max-md:text-[12px] text-left">
               Username
             </p>
-            <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
+            <p className="font-light text-white tracking-[0.05em] text-[16px] max-md:text-[12px] text-left">
               Score
             </p>
-            <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
+            <p className="font-light text-white tracking-[0.05em] text-[16px] max-md:text-[12px] text-left">
               Date
             </p>
           </div>
@@ -168,16 +178,16 @@ const Leaderboard: React.FC<LeaderboardProps> = ({ entries = [], onClose }) => {
                   index
                 )}  rounded-lg p-3 grid grid-cols-[1fr_2fr_1fr_1.5fr] gap-4`}
               >
-                <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
+                <p className="font-light text-white tracking-[0.05em] text-[16px] max-md:text-[10px] text-left">
                   {index + 1}
                 </p>
-                <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
-                  {entry.username}
+                <p className="font-light text-white tracking-[0.05em] text-[16px] max-md:text-[10px] text-left">
+                  {handleUserName(entry.username)}
                 </p>
-                <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
+                <p className="font-light text-white tracking-[0.05em] text-[16px] max-md:text-[10px] text-left">
                   {entry.score}
                 </p>
-                <p className="font-light text-white tracking-[0.05em] text-[16px] text-left">
+                <p className="font-light text-white tracking-[0.05em] text-[16px] max-md:text-[10px] text-left">
                   {new Date(entry.timestamp).toLocaleDateString()}
                 </p>
               </div>

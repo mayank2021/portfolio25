@@ -317,7 +317,7 @@ const Experience = () => {
             >
               <img
                 src={`/images/${company?.logo}`}
-                className={`rounded-full w-[244px] p-4 h-[244px] max-md:w-[160px] max-md:h-[160px] absolute -top-[200px] max-md:-top-[30px] ${
+                className={`rounded-full w-[244px] p-4 h-[244px] max-md:w-[160px] max-md:h-[160px] absolute -top-[100px] max-md:-top-[30px] ${
                   ind % 2 === 0
                     ? "-left-[400px] max-md:-left-[60px]"
                     : "-right-[400px]  max-md:-right-[60px]"
