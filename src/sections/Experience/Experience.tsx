@@ -75,13 +75,13 @@ const content: Company[] = [
     bg: "psi.png",
     color: "#CD5656",
     highlights: [
-      "Deployed two responsive, multi-role (admin, sub-admin, user) dashboards from scratch",
-      "Handles large amount of data with customized reusable components such as charts, modals, and paginated tables",
+      "Deployed two responsive, multi-role (admin, sub-admin, user) dashboards from scratch.",
+      "Handles large amount of data with customized reusable components such as charts, modals, and paginated tables.",
       "Implemented React optimization hooks, advanced patterns, and reduced code complexity by using small, reusable components with a feature-first approach project structure.",
       [
         "Livestock",
-        "Deployed two responsive, multi-role (admin, sub-admin, user) dashboards from scratch",
-        "Handles large amount of data with customized reusable components such as charts, modals, and paginated tables",
+        "Deployed two responsive, multi-role (admin, sub-admin, user) dashboards from scratch.",
+        "Handles large amount of data with customized reusable components such as charts, modals, and paginated tables.",
         "Implemented React optimization hooks, advanced patterns, and reduced code complexity by using small, reusable components with a feature-first approach project structure.",
       ],
       [
@@ -200,7 +200,7 @@ const CompanyDetail = ({
 }) => {
   return (
     <div
-      className={`w-full max-md:overflow-y-auto h-screen z-10 bg-[#111] fixed top-0 left-0 transition-all duration-500 ease-in-out ${
+      className={`w-full pb-10 overflow-y-auto h-screen z-10 bg-[#111] fixed top-0 left-0 transition-all duration-500 ease-in-out ${
         show ? "translate-x-0" : "translate-x-[110%]"
       }`}
     >
@@ -211,7 +211,7 @@ const CompanyDetail = ({
         >
           <AnimatedCircles text="X" textStyle="text-white font-bold" />
         </button>
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <img
             src={`/images/${selectedCompany?.bg}`}
             className="w-[40%] h-screen max-md:hidden"

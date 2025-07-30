@@ -10,12 +10,32 @@ const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const options: Option[] = [
     { value: "download", label: "Download" },
     { value: "view", label: "View" },
     { value: "copy", label: "Copy link" },
   ];
+
+  // Filter options for mobile - hide view option on mobile
+  const filteredOptions = options.filter((option) => {
+    if (option.value === "view") {
+      return !isMobile; // Hide view option on mobile
+    }
+    return true;
+  });
+
+  // Handle window resize for mobile detection
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -107,7 +127,7 @@ const Dropdown = () => {
           }`}
         >
           <div className="py-1">
-            {options.map((option, index) => (
+            {filteredOptions.map((option, index) => (
               <button
                 key={option.value}
                 onClick={() => handleOptionClick(option)}
@@ -144,7 +164,9 @@ const Dropdown = () => {
       `}</style>
       <div
         className={`fixed top-24 text-[12px] border border-white right-8 text-white px-4 py-2 rounded-lg shadow-lg transition-all duration-500 z-50 transform ${
-          isVisible ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4"
+          isVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 hidden -translate-y-4"
         }`}
       >
         <p className="font-normal">Copied to clipboard</p>
