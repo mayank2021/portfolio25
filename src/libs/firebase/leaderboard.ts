@@ -61,8 +61,6 @@ export const submitScoreForReview = async (scoreData: {
       submittedAt: Timestamp.now(),
       status: "pending",
     };
-    alert(newScoreData);
-    alert(existingSnapshot?.empty);
     if (!existingSnapshot.empty) {
       // Update existing pending score
       const existingDoc = existingSnapshot.docs[0];
@@ -93,14 +91,12 @@ export const submitScoreForReview = async (scoreData: {
     }
   } catch (error) {
     console.error("Error submitting score for review:", error);
-    alert(error);
     if (
       error instanceof Error &&
       error.message.includes("higher than or equal")
     ) {
       throw error; // Re-throw our custom error message
     }
-    alert("final");
     throw new Error("Failed to submit score for review");
   }
 };
