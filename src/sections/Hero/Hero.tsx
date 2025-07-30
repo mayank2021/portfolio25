@@ -70,6 +70,16 @@ export default function HeroSection({
   funMode: boolean;
   setFunMode: () => void;
 }) {
+  const scrollToExperience = () => {
+    const experienceSection = document.getElementById("experience-section");
+    if (experienceSection) {
+      experienceSection.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  };
+
   return (
     <div className="relative bg-[#111]">
       <header className="flex pt-6 px-10 max-md:px-4 max-md:pt-2 max-md:items-start justify-between absolute top-0 w-full -translate-y-[200px] animate-header">
@@ -122,7 +132,10 @@ export default function HeroSection({
               </div>
             </div>
           </div>
-          <button className="opacity-0 absolute animate-show_circle left-1/2 transform !-translate-x-[50%] bottom-16 text-white">
+          <button
+            className="opacity-0 absolute animate-show_circle left-1/2 transform !-translate-x-[50%] bottom-16 text-white"
+            onClick={scrollToExperience}
+          >
             <AnimatedCircles height={60} width={60}>
               <AnimatedArrowButton />
             </AnimatedCircles>
