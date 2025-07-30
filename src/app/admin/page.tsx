@@ -400,38 +400,6 @@ export default function AdminPage() {
             </div>
           )}
         </div>
-
-        {/* Instructions */}
-        <div className="mt-8 p-6 bg-[#111] border border-[rgba(255,255,255,0.3)] rounded-lg">
-          <h3 className="text-lg font-semibold text-[#4BAE79] mb-3">
-            How It Works
-          </h3>
-          <ul className="space-y-2 text-[#a9a9a9]">
-            <li>
-              • <strong>Approve:</strong> Moves the score to the public
-              leaderboard
-            </li>
-            <li>
-              • <strong>Reject:</strong> Removes the score from pending
-              (won&apos;t appear on leaderboard)
-            </li>
-            <li>
-              • <strong>Refresh:</strong> Check for new score submissions
-            </li>
-            <li>
-              • <strong>Automatic Duplicate Handling:</strong> System
-              automatically updates existing entries by email
-            </li>
-            <li>
-              • <strong>Smart Updates:</strong> Replaces username and score for
-              existing email addresses
-            </li>
-            <li>
-              • Approved scores appear immediately on your portfolio&apos;s
-              leaderboard
-            </li>
-          </ul>
-        </div>
       </div>
     </div>
   );
