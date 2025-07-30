@@ -154,7 +154,7 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
 
   return (
     <div
-      className="bg-[#111] text-white rounded-lg p-8 max-w-md w-full mx-4"
+      className="bg-[#111] text-white rounded-lg p-8 max-md:px-0 max-w-md w-full mx-4"
       onClick={(e) => e.stopPropagation()}
     >
       <div className="text-center mb-6">
@@ -245,14 +245,14 @@ const LeaderboardForm: React.FC<LeaderboardFormProps> = ({
               e.stopPropagation();
               onClose();
             }}
-            className="w-full px-4 py-3 min-w-[140px] text-center bg-[#111] border hover:bg-[rgba(255,255,255,0.2)]   border-[rgba(255,255,255,0.5)] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
+            className="w-full px-4 py-3 min-w-[140px] text-center max-md:text-[12px] max-md:px-2 max-md:py-2 bg-[#111] border hover:bg-[rgba(255,255,255,0.2)]   border-[rgba(255,255,255,0.5)] rounded-md shadow-sm  focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out"
           >
             Cancel
           </button>
           <button
             type="submit"
             disabled={isSubmitting}
-            className={`w-full px-4 min-w-[140px] text-center py-3 bg-[#111] border rounded-md shadow-sm focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out ${
+            className={`w-full px-4 min-w-[140px] text-center py-3 max-md:text-[12px] max-md:px-2 max-md:py-2 bg-[#111] border rounded-md shadow-sm focus:outline-none focus:ring-0 transition-all duration-200 ease-in-out ${
               isSubmitting
                 ? "border-gray-500 text-gray-500 cursor-not-allowed"
                 : "border-[#5EA239] hover:bg-[rgba(94,162,57,0.2)]"

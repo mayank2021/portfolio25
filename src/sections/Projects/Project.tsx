@@ -3,6 +3,7 @@
 import Ripple from "@/components/Ripple/Ripple";
 import React, { useState } from "react";
 import { ChevronDown } from "lucide-react";
+import Typography from "@/components/Typography";
 
 const content = [
   {
@@ -55,7 +56,16 @@ const Projects = () => {
                 hoveredIndex === ind ? "-translate-y-[300%]" : "translate-y-0"
               }`}
             >
-              {title}{" "}
+              <Typography
+                variant="stroke"
+                borderWidth={1}
+                borderColor="#a9a9a9"
+                textColor="#111"
+                fontSize="3.5rem"
+                className="max-md:!text-[24px] tracking-[0.03em]"
+              >
+                {title}
+              </Typography>{" "}
               <ChevronDown
                 className={`hidden max-md:block w-5 h-5 text-[rgba(255,255,255,1)]`}
               />

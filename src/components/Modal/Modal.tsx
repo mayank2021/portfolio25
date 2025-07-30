@@ -104,7 +104,7 @@ const Modal: React.FC<ModalProps> = ({
       >
         {/* Header */}
         {showCloseButton && (
-          <div className="absolute top-4 right-4 z-10">
+          <div className="absolute top-4 right-4 z-10 max-md:-right-2 max-md:top-6">
             <button
               onClick={onClose}
               className="text-white absolute top-5 right-5"
